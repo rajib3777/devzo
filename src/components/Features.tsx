@@ -116,7 +116,7 @@ export default function Services() {
         >
           <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight">
             Our Professional Services<br />
-            <span className="text-white/40">to grow your brand.</span>
+            <span className="text-white/40">to grow your brand with <span className="text-accent">360 degree services.</span></span>
           </h2>
           <p className="mt-5 text-white/60 max-w-xl mx-auto">
             We offer top-notch content creation, digital marketing, and web development services.
@@ -205,11 +205,12 @@ export default function Services() {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="w-40 h-40 rounded-full bg-gradient-to-br from-accent to-accent2 p-[2.5px] shadow-glow"
+              className="w-56 h-56 rounded-full bg-gradient-to-br from-accent to-accent2 p-[3px] shadow-glow"
             >
-              <div className="w-full h-full rounded-full bg-bg flex flex-col items-center justify-center text-center px-2">
-                <span className="text-base font-black text-accent uppercase tracking-widest leading-tight">Rana IT</span>
-                <span className="text-sm font-semibold text-white/70 mt-1">360° Services</span>
+              <div className="w-full h-full rounded-full bg-bg flex flex-col items-center justify-center text-center px-4">
+                <span className="text-2xl font-black text-accent uppercase tracking-[0.2em] leading-tight">Rana IT</span>
+                <div className="h-px w-12 bg-white/20 my-2" />
+                <span className="text-base font-bold text-white/80 uppercase tracking-widest">360° Services</span>
               </div>
             </motion.div>
           </div>
