@@ -1,15 +1,18 @@
 import TiltCard from './TiltCard'
 
 const stats = [
-  { label: 'Boost Efficiency', value: '90%', desc: 'Increase in efficiency with our AI‑powered solutions.' },
-  { label: 'Trusted By', value: '150K+', desc: 'Professionals leverage our AI to stay ahead.' },
-  { label: 'Proven Impact', value: '$20M+', desc: 'In business impact, turning ideas into results.' }
+  { label: 'Happy Clients', value: '659+', desc: 'Businesses that scaled using our marketing expertise.' },
+  { label: 'Ads ROI', value: '110%', desc: 'Average return on investment for our ad campaigns.' },
+  { label: 'Completed Projects', value: '403+', desc: 'Websites and branding projects successfully delivered.' }
 ]
 
 export default function Stats() {
   return (
-    <section className="relative">
+    <section id="partners" className="relative">
       <div className="mx-auto max-w-6xl px-5 py-10">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-semibold tracking-tight">Our Partners & Impact</h2>
+        </div>
         <div className="grid md:grid-cols-3 gap-6">
           {stats.map((s, i) => (
             <TiltCard
@@ -26,6 +29,14 @@ export default function Stats() {
               />
             </TiltCard>
           ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <button
+            onClick={() => document.dispatchEvent(new CustomEvent('open-message-modal'))}
+            className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium border border-white/10 bg-gradient-to-r from-accent to-accent2 shadow-glow hover:scale-105 transition-transform"
+          >
+            Give Offer
+          </button>
         </div>
       </div>
       <div className="arc-line" style={{ top: '100%' }} />

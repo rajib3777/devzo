@@ -8,25 +8,37 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-6xl px-5 py-16 relative">
+        <div className="mb-16 w-full h-[300px] rounded-2xl overflow-hidden border border-white/10 shadow-soft">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.603310037894!2d90.36643261543206!3d23.800676492906497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c1200388e635%3A0xc6e4de552f50d7!2sMirpur%2010%20Roundabout%2C%20Dhaka%201216!5e0!3m2!1sen!2sbd!4v1625062402288!5m2!1sen!2sbd" 
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen={true} 
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
         <div className="grid md:grid-cols-4 gap-10">
           <div>
-            <div className="text-2xl font-semibold tracking-tight">devzo<span className="text-accent">.</span></div>
+            <div className="text-2xl font-semibold tracking-tight">Rana IT Ltd<span className="text-accent">.</span></div>
             <p className="mt-3 text-sm text-white/60 leading-relaxed">
-              Transforming ideas into AI‑Powered success.
+              Transforming businesses with Professional Digital Marketing.
             </p>
             <div className="mt-6 flex items-center gap-3">
-              {['in', 'x', 'ig', 'yt'].map((s) => (
+              {['fb', 'in', 'ig', 'yt'].map((s) => (
                 <a
                   key={s}
                   href="#"
                   data-interactive="true"
-                  className="h-9 w-9 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-colors inline-flex items-center justify-center text-xs text-white/80"
+                  className="h-9 w-9 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-colors inline-flex items-center justify-center text-xs text-white/80 uppercase"
                 >
-                  {s.toUpperCase()}
+                  {s}
                 </a>
               ))}
             </div>
-            <p className="mt-10 text-xs text-white/40">© {new Date().getFullYear()} devzo. All Rights Reserved</p>
+            <p className="mt-10 text-xs text-white/40">© {new Date().getFullYear()} Rana IT Ltd. All Rights Reserved</p>
           </div>
 
           <div>
@@ -34,9 +46,9 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-white/60">
               {[
                 ['Home', '#home'],
-                ['Features', '#features'],
+                ['Services', '#features'],
                 ['Pricing', '#pricing'],
-                ['Testimonials', '#testimonials'],
+                ['Partners', '#partners'],
                 ['FAQ', '#faq']
               ].map(([t, h]) => (
                 <li key={h}>
@@ -49,9 +61,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold">Help</p>
+            <p className="text-sm font-semibold">Company</p>
             <ul className="mt-4 space-y-3 text-sm text-white/60">
-              {['Help Center', 'Community', 'Terms of Use', 'Privacy Policy'].map((t) => (
+              {['About Us', 'Project Showcase', 'Terms of Use', 'Privacy Policy'].map((t) => (
                 <li key={t}>
                   <a data-interactive="true" href="#" className="hover:text-white transition-colors">
                     {t}
@@ -68,19 +80,19 @@ export default function Footer() {
                 <span className="h-9 w-9 rounded-full border border-white/10 bg-white/5 inline-flex items-center justify-center">
                   <Phone className="h-4 w-4 text-white/80" />
                 </span>
-                <span>+1 220 5119 223</span>
+                <span>01815-311438</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="h-9 w-9 rounded-full border border-white/10 bg-white/5 inline-flex items-center justify-center">
                   <Mail className="h-4 w-4 text-white/80" />
                 </span>
-                <span>hello@devzo.com</span>
+                <span>hello@ranait.com</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="h-9 w-9 rounded-full border border-white/10 bg-white/5 inline-flex items-center justify-center mt-0.5">
                   <MapPin className="h-4 w-4 text-white/80" />
                 </span>
-                <span>192 Westlime St. Saint Louis, Georgia 84231</span>
+                <span>House 4, Bindu Britto Goli, Mirpur, Dhaka - 1216</span>
               </li>
             </ul>
           </div>

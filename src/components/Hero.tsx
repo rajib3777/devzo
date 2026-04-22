@@ -120,7 +120,7 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             className="text-sm text-white/70"
           >
-            Future-ready automation • AI-first workflows • Built for teams
+            Professional Facebook Marketing • Web Development • SEO
           </motion.p>
 
           <motion.h1
@@ -130,18 +130,18 @@ export default function Hero() {
             className="mt-8 text-4xl sm:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight"
           >
             <span className="block">
-              {'Work Smarter With'.split(' ').map((t) => (
+              {'Best Digital Agency'.split(' ').map((t) => (
                 <motion.span key={t} variants={word} className="inline-block mr-3">
                   {t}
                 </motion.span>
               ))}
             </span>
             <span className="block mt-2">
+              <motion.span variants={word} className="inline-block mr-3">
+                in
+              </motion.span>
               <motion.span variants={word} className="gradient-text font-bold animate-shimmer">
-                AI-Powered
-              </motion.span>{' '}
-              <motion.span variants={word} className="inline-block">
-                Automation
+                Bangladesh
               </motion.span>
             </span>
           </motion.h1>
@@ -152,32 +152,30 @@ export default function Hero() {
             transition={{ delay: 0.45, duration: 0.7 }}
             className="mt-6 max-w-2xl text-base sm:text-lg text-white/70"
           >
-            Our AI-powered platform takes care of repetitive tasks, optimizes workflows, and helps you scale your business
-            effortlessly.
+            We provide professional digital marketing, web development, and branding services to take your business further and scale it effortlessly.
           </motion.p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
-            <motion.a
-              href="#pricing"
+            <motion.button
+              onClick={() => document.dispatchEvent(new CustomEvent('open-message-modal'))}
               data-interactive="true"
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium border border-white/10 bg-gradient-to-r from-accent to-accent2 shadow-glow"
+              className="inline-flex items-center justify-center rounded-full px-8 py-4 text-sm font-bold border border-white/10 bg-gradient-to-r from-accent to-accent2 shadow-glow text-white"
             >
-              Try for Free
-            </motion.a>
+              Give Offer
+            </motion.button>
 
             <motion.a
-              href="#features"
+              href="#projects"
               data-interactive="true"
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium border border-white/20 bg-white/5 hover:bg-white/8 transition-colors"
+              className="inline-flex items-center justify-center rounded-full px-8 py-4 text-sm font-bold border border-white/20 bg-white/5 hover:bg-white/10 transition-colors text-white"
             >
-              <Play className="w-4 h-4 mr-2" />
-              Watch Demo
-              <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/30">
-                ↗
+              See Projects
+              <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/30 text-xs">
+                ↓
               </span>
             </motion.a>
           </div>

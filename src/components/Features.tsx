@@ -1,165 +1,300 @@
-import { motion } from 'framer-motion'
-import { Brain, BarChart3, PlugZap, ShieldCheck } from 'lucide-react'
-import TiltCard from './TiltCard'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Video, Share2, Megaphone, Camera, MonitorSmartphone, PenTool } from 'lucide-react'
 
-const pills = [
-  { title: 'Smart\nAutomation', icon: Brain },
-  { title: 'Data-Driven\nInsights', icon: BarChart3 },
-  { title: 'Seamless\nIntegration', icon: PlugZap },
-  { title: 'Scalable &\nSecure', icon: ShieldCheck }
-]
-
-const cards = [
+const services = [
   {
-    title: 'Automate the boring stuff',
-    desc: 'Turn repetitive workflows into reliable pipelines. Set triggers, approvals, and fallback logic in minutes.'
+    icon: Video,
+    title: 'Video Editing',
+    subtitle: '& Motion Graphics',
+    desc: 'High-impact video content, reels, TikToks, and animated motion graphics tailored for maximum engagement.',
+    color: 'from-pink-500 to-rose-600',
+    glow: 'rgba(236,72,153,0.5)',
   },
   {
-    title: 'Analytics that speak human',
-    desc: 'Real-time dashboards and forecasting that surface the next best action — not just charts.'
+    icon: Share2,
+    title: 'Social Media',
+    subtitle: 'Management',
+    desc: 'Full page management, content scheduling, community engagement, and monthly performance reports.',
+    color: 'from-violet-500 to-purple-700',
+    glow: 'rgba(139,92,246,0.5)',
   },
   {
-    title: 'Plug into your stack',
-    desc: 'Connect to the tools you already use. Keep data in sync with strong governance and audit trails.'
-  }
+    icon: Megaphone,
+    title: 'Ad Campaign',
+    subtitle: '& Run',
+    desc: 'Data-driven Facebook, Google, and TikTok ad campaigns with pixel tracking, scaling, and ROI reports.',
+    color: 'from-orange-400 to-orange-600',
+    glow: 'rgba(251,146,60,0.5)',
+  },
+  {
+    icon: Camera,
+    title: 'Product Shoot',
+    subtitle: 'Photography & Video',
+    desc: 'Professional indoor & outdoor product shoots and promotional videos that elevate your brand image.',
+    color: 'from-cyan-400 to-blue-600',
+    glow: 'rgba(34,211,238,0.5)',
+  },
+  {
+    icon: MonitorSmartphone,
+    title: 'Web Development',
+    subtitle: '& Landing Page',
+    desc: 'Fast, responsive websites and high-converting landing pages optimized for SEO and sales.',
+    color: 'from-emerald-400 to-teal-600',
+    glow: 'rgba(52,211,153,0.5)',
+  },
+  {
+    icon: PenTool,
+    title: 'Graphics Designing',
+    subtitle: 'Brand Identity',
+    desc: 'Premium logos, brand identity, ad creatives, social media posts, and cover designs.',
+    color: 'from-yellow-400 to-amber-600',
+    glow: 'rgba(251,191,36,0.5)',
+  },
 ]
 
-export default function Features() {
+// The orbit math:
+// WRAPPER = total div size in px
+// CENTER  = exact pixel center of the div
+// Cards are positioned: left = 50% + cos(angle)*R, top = 50% + sin(angle)*R
+// SVG circle cx=CENTER cy=CENTER r=ORBIT_RADIUS is therefore EXACTLY aligned.
+const ORBIT_RADIUS = 240
+const WRAPPER      = ORBIT_RADIUS * 2 + 200   // 680px
+const CENTER       = WRAPPER / 2              // 340px
+const TOTAL        = services.length
+
+export default function Services() {
+  const [angle, setAngle] = useState(0)
+  const [active, setActive] = useState<number | null>(null)
+  const [paused, setPaused] = useState(false)
+  const [orbitScale, setOrbitScale] = useState(1)
+  const raf  = useRef<number>()
+  const last = useRef<number>(0)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const speed = 0.3
+
+  // Compute responsive scale so orbit fits its container
+  useEffect(() => {
+    const update = () => {
+      const w = sectionRef.current?.offsetWidth ?? window.innerWidth
+      setOrbitScale(w < WRAPPER ? w / WRAPPER : 1)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  useEffect(() => {
+    const tick = (ts: number) => {
+      if (!paused) {
+        const dt = ts - last.current
+        setAngle((a) => (a + speed * (dt / 16)) % 360)
+      }
+      last.current = ts
+      raf.current = requestAnimationFrame(tick)
+    }
+    raf.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf.current!)
+  }, [paused])
+
   return (
-    <section id="features" className="relative overflow-hidden mt-8">
+    <section id="features" className="relative overflow-hidden py-28">
       <div className="absolute inset-0 pointer-events-none">
-        {/* ✅ TOP ARC: always visible */}
-        <svg
-          className="absolute left-0 top-0 w-full h-[520px] opacity-95"
-          viewBox="0 0 1440 520"
-          fill="none"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-          style={{ overflow: 'visible' }}
-        >
-          <defs>
-            <linearGradient id="featuresCurveGrad" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#8E23E2">
-                <animate attributeName="stop-color" values="#8E23E2;#CF2576;#FFD000;#8E23E2" dur="6s" repeatCount="indefinite" />
-              </stop>
-              <stop offset="50%" stopColor="#CF2576">
-                <animate attributeName="stop-color" values="#CF2576;#FFD000;#8E23E2;#CF2576" dur="6s" repeatCount="indefinite" />
-              </stop>
-              <stop offset="100%" stopColor="#FFD000">
-                <animate attributeName="stop-color" values="#FFD000;#8E23E2;#CF2576;#FFD000" dur="6s" repeatCount="indefinite" />
-              </stop>
-              <animate attributeName="x1" values="0;1440;0" dur="7s" repeatCount="indefinite" />
-              <animate attributeName="x2" values="1440;0;1440" dur="7s" repeatCount="indefinite" />
-            </linearGradient>
-
-            <filter id="featuresCurveGlow" x="-30%" y="-200%" width="160%" height="500%">
-              <feGaussianBlur stdDeviation="5" result="blur" />
-              <feColorMatrix
-                in="blur"
-                type="matrix"
-                values="
-                  1 0 0 0 0
-                  0 1 0 0 0
-                  0 0 1 0 0
-                  0 0 0 0.9 0"
-              />
-              <feMerge>
-                <feMergeNode />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* ✅ big arc like screenshot (top-left to right-down) */}
-          <path
-            d="M-260 140 C 260 -40, 720 -20, 1000 120 C 1260 250, 1460 360, 1760 520"
-            stroke="url(#featuresCurveGrad)"
-            strokeWidth="7"
-            strokeLinecap="round"
-            opacity="0.55"
-            filter="url(#featuresCurveGlow)"
-          />
-          <path
-            d="M-260 140 C 260 -40, 720 -20, 1000 120 C 1260 250, 1460 360, 1760 520"
-            stroke="url(#featuresCurveGrad)"
-            strokeWidth="2.25"
-            strokeLinecap="round"
-            opacity="0.95"
-          />
-        </svg>
-
-        <div className="ring-gradient" style={{ left: '-18%', top: '24%', opacity: 0.7 }} />
-        <div className="arc-line" style={{ top: '42%' }} />
+        <div className="ring-gradient" style={{ left: '-10%', top: '-20%', opacity: 0.5 }} />
+        <div className="ring-gradient" style={{ right: '-10%', bottom: '-20%', opacity: 0.5 }} />
       </div>
 
+      <div className="mx-auto max-w-6xl px-5 relative" ref={sectionRef}>
 
-      <div className="mx-auto max-w-6xl px-5 py-20 relative">
-        <div className="text-center relative">
-
-          <motion.h2
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-120px' }}
-            transition={{ duration: 0.7 }}
-            className="text-3xl sm:text-5xl font-semibold tracking-tight"
+        {/* ── Heading ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight">
+            Our Professional Services<br />
+            <span className="text-white/40">to grow your brand.</span>
+          </h2>
+          <p className="mt-5 text-white/60 max-w-xl mx-auto">
+            We offer top-notch content creation, digital marketing, and web development services.
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => document.dispatchEvent(new CustomEvent('open-message-modal'))}
+            className="mt-8 inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium border border-white/10 bg-gradient-to-r from-accent to-accent2 shadow-glow"
           >
-            Built for efficiency,<br />
-            <span className="text-white/40">designed for growth.</span>
-          </motion.h2>
+            Give Offer
+          </motion.button>
+        </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-120px' }}
-            transition={{ delay: 0.08, duration: 0.7 }}
-            className="mt-5 text-white/65 max-w-xl mx-auto"
+        {/* Responsive orbit scale container */}
+        <div
+          style={{
+            width: '100%',
+            height: WRAPPER * orbitScale,
+            display: 'flex',
+            justifyContent: 'center',
+            overflow: 'visible',
+          }}
+        >
+        <div
+          className="relative flex-shrink-0"
+          style={{
+            width: WRAPPER,
+            height: WRAPPER,
+            transform: `scale(${orbitScale})`,
+            transformOrigin: 'top center',
+          }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => { setPaused(false); setActive(null) }}
+        >
+
+          {/* ── SVG animated orbit ring — perfectly aligned ── */}
+          <svg
+            className="absolute inset-0 pointer-events-none"
+            width={WRAPPER}
+            height={WRAPPER}
+            viewBox={`0 0 ${WRAPPER} ${WRAPPER}`}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
-          </motion.p>
-        </div>
+            <defs>
+              {/* Animated colour gradient */}
+              <linearGradient id="orbitGrad" x1="0" y1="0" x2={WRAPPER} y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#8E23E2">
+                  <animate attributeName="stop-color"
+                    values="#8E23E2;#CF2576;#FFD000;#8E23E2" dur="6s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="50%" stopColor="#CF2576">
+                  <animate attributeName="stop-color"
+                    values="#CF2576;#FFD000;#8E23E2;#CF2576" dur="6s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" stopColor="#FFD000">
+                  <animate attributeName="stop-color"
+                    values="#FFD000;#8E23E2;#CF2576;#FFD000" dur="6s" repeatCount="indefinite" />
+                </stop>
+              </linearGradient>
 
-        <div className="mt-14">
-          <div className="relative flex items-center justify-between gap-4">
-            <div className="absolute left-7 right-7 top-1/2 -translate-y-1/2 h-px bg-white/15" />
+              {/* Glow filter */}
+              <filter id="orbitGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
 
-            {pills.map((p) => {
-              const Icon = p.icon
-              return (
-                <motion.div
-                  key={p.title}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-140px' }}
-                  transition={{ duration: 0.6 }}
-                  className="relative flex flex-col items-center gap-3"
-                >
-                  <div className="relative">
-                    <div className="h-16 w-16 rounded-full bg-gradient-to-r from-accent to-accent2 p-[1px] shadow-glow">
-                      <div className="h-full w-full rounded-full bg-bg/80 backdrop-blur flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 h-2 w-2 rounded-full bg-white/80" />
-                  </div>
+            {/* Soft glow ring */}
+            <circle cx={CENTER} cy={CENTER} r={ORBIT_RADIUS}
+              stroke="url(#orbitGrad)" strokeWidth="8" fill="none"
+              opacity="0.25" filter="url(#orbitGlow)" />
 
-                  <p className="text-xs sm:text-sm text-white/80 text-center whitespace-pre-line">{p.title}</p>
-                </motion.div>
-              )
-            })}
-          </div>
-        </div>
+            {/* Dashed animated ring */}
+            <circle cx={CENTER} cy={CENTER} r={ORBIT_RADIUS}
+              stroke="url(#orbitGrad)" strokeWidth="1.5" fill="none"
+              opacity="0.9" strokeDasharray="14 8">
+              <animateTransform attributeName="transform" type="rotate"
+                from={`0 ${CENTER} ${CENTER}`}
+                to={`360 ${CENTER} ${CENTER}`}
+                dur="25s" repeatCount="indefinite" />
+            </circle>
+          </svg>
 
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
-          {cards.map((c) => (
-            <TiltCard key={c.title} className="rounded-3xl border border-white/10 bg-card p-7 shadow-soft">
-              <p className="text-lg font-semibold">{c.title}</p>
-              <p className="mt-3 text-sm text-white/70 leading-relaxed">{c.desc}</p>
-              <div className="mt-6 inline-flex items-center text-sm text-white/70">
-                Learn more <span className="ml-2">→</span>
+          {/* ── Center hub ── */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+              className="w-40 h-40 rounded-full bg-gradient-to-br from-accent to-accent2 p-[2.5px] shadow-glow"
+            >
+              <div className="w-full h-full rounded-full bg-bg flex flex-col items-center justify-center text-center px-2">
+                <span className="text-base font-black text-accent uppercase tracking-widest leading-tight">Rana IT</span>
+                <span className="text-sm font-semibold text-white/70 mt-1">360° Services</span>
               </div>
-            </TiltCard>
-          ))}
+            </motion.div>
+          </div>
+
+          {/* ── Orbit items ── */}
+          {services.map((svc, i) => {
+            const baseAngleDeg = (i * 360) / TOTAL
+            const totalDeg    = baseAngleDeg + angle
+            const rad         = (totalDeg * Math.PI) / 180
+            const cx          = Math.cos(rad) * ORBIT_RADIUS
+            const cy          = Math.sin(rad) * ORBIT_RADIUS
+            const isActive    = active === i
+            const Icon        = svc.icon
+
+            return (
+              <motion.div
+                key={svc.title}
+                className="absolute"
+                style={{
+                  left: `calc(50% + ${cx}px)`,
+                  top:  `calc(50% + ${cy}px)`,
+                  translateX: '-50%',
+                  translateY: '-50%',
+                  zIndex: isActive ? 20 : 10,
+                }}
+                animate={{ scale: isActive ? 1.18 : 1 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+                onMouseEnter={() => setActive(i)}
+              >
+                <motion.div
+                  className="relative w-36 h-36 rounded-2xl border border-white/10 bg-bg/80 backdrop-blur-xl cursor-pointer flex flex-col items-center justify-center gap-2 p-3 text-center"
+                  style={{
+                    boxShadow: isActive
+                      ? `0 0 40px 8px ${svc.glow}, 0 0 0 1px rgba(255,255,255,0.08)`
+                      : '0 0 0 1px rgba(255,255,255,0.06)',
+                  }}
+                  onClick={() => setActive(isActive ? null : i)}
+                >
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${svc.color} flex items-center justify-center shadow-lg`}>
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <p className="text-xs font-semibold text-white leading-tight">{svc.title}</p>
+                  <p className="text-[10px] text-white/50">{svc.subtitle}</p>
+                </motion.div>
+
+                {/* Tooltip popup */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.92 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.92 }}
+                      transition={{ duration: 0.22 }}
+                      className="absolute z-30 w-56 rounded-2xl border border-white/10 bg-bg/95 backdrop-blur-xl p-4 text-left"
+                      style={{
+                        top:     cy > 0 ? 'auto' : '110%',
+                        bottom:  cy > 0 ? '110%' : 'auto',
+                        left:    '50%',
+                        translateX: '-50%',
+                        boxShadow: `0 0 30px 4px ${svc.glow}`,
+                      }}
+                    >
+                      <div className={`text-xs font-bold mb-2 bg-gradient-to-r ${svc.color} bg-clip-text text-transparent uppercase tracking-wider`}>
+                        {svc.title} {svc.subtitle}
+                      </div>
+                      <p className="text-[11px] text-white/70 leading-relaxed">{svc.desc}</p>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          document.dispatchEvent(new CustomEvent('open-message-modal'))
+                        }}
+                        className={`mt-3 w-full text-[11px] font-semibold px-3 py-1.5 rounded-full bg-gradient-to-r ${svc.color} text-white`}
+                      >
+                        Give Offer →
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
         </div>
+
+        </div>{/* close scroll wrapper */}
+
       </div>
     </section>
   )

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'
 
-
 export default function CTA() {
   return (
     <section id="contact" className="relative overflow-hidden">
@@ -17,31 +16,18 @@ export default function CTA() {
             <div className="relative">
               <h3 className="text-3xl sm:text-5xl font-semibold tracking-tight">Get to know us</h3>
               <p className="mt-4 text-white/65 max-w-xl">
-                devzo helps teams adopt AI automation without the complexity. Secure by design, delightful by default.
+                Rana IT Ltd helps businesses scale fast with professional digital marketing, web development, and top-tier branding services.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <motion.a
-                  href="#pricing"
+                <motion.button
+                  onClick={() => document.dispatchEvent(new CustomEvent('open-message-modal'))}
                   data-interactive="true"
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium border border-white/10 bg-gradient-to-r from-accent to-accent2 shadow-glow"
                 >
-                  Try for Free
-                </motion.a>
-                <motion.a
-                  href="#features"
-                  data-interactive="true"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium border border-white/20 bg-white/5 hover:bg-white/8 transition-colors"
-                >
-                  <Play className="w-4 h-4 mr-2" />
-                  Watch Demo
-                  <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/30">
-                    ↗
-                  </span>
-                </motion.a>
+                  Give Offer
+                </motion.button>
               </div>
             </div>
           </div>
@@ -50,35 +36,22 @@ export default function CTA() {
         <div className="mt-16 rounded-[32px] bg-[#F7F6F9] text-[#060606] px-8 sm:px-14 py-16 text-center shadow-soft">
           <h4 className="text-3xl sm:text-5xl font-semibold tracking-tight">
             Take your business to<br />
-            the next level with AI
+            the next level today
           </h4>
           <p className="mt-5 text-black/65 max-w-2xl mx-auto">
-            Enhance efficiency, automate tasks, and gain smart insights with AI. Grow faster and stay ahead in the competitive market!
+            Enhance brand awareness, automate your growth, and gain smart insights with our marketing expertise. Grow faster and stay ahead in the competitive market!
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.a
-              href="#pricing"
+            <motion.button
+              onClick={() => document.dispatchEvent(new CustomEvent('open-message-modal'))}
               data-interactive="true"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium bg-gradient-to-r from-accent to-accent2 text-white shadow-glow"
             >
-              Try for Free
-            </motion.a>
-            <motion.a
-              href="#features"
-              data-interactive="true"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium border border-black/15 bg-white hover:bg-black/[0.03] transition-colors"
-            >
-              <Play className="w-4 h-4 mr-2" />
-              Watch Demo
-              <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-black/20">
-                ↗
-              </span>
-            </motion.a>
+              Give Offer
+            </motion.button>
           </div>
         </div>
       </div>

@@ -1,19 +1,45 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
-import Features from './components/Features'
+import Services from './components/Features'
 import Pricing from './components/Pricing'
-import Testimonials from './components/Testimonials'
+import ProjectShowcase from './components/ProjectShowcase'
+import AboutCompany from './components/AboutCompany'
+import Clients from './components/Clients'
+import Reviews from './components/Reviews'
 import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
+import MessageModal from './components/MessageModal'
+import AboutPage from './pages/AboutPage'
+
+function HomePage() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <AboutCompany />
+        <Services />
+        <ProjectShowcase />
+        <Stats />
+        <Clients />
+        <Pricing />
+        <Reviews />
+        <FAQ />
+        <CTA />
+      </main>
+      <Footer />
+    </>
+  )
+}
 
 export default function App() {
   const [isHoveringInteractive, setIsHoveringInteractive] = useState(false)
 
-  // Custom cursor
   const mx = useMotionValue(-100)
   const my = useMotionValue(-100)
   const dx = useSpring(mx, { stiffness: 700, damping: 45 })
@@ -44,37 +70,32 @@ export default function App() {
   const ringSize = useMemo(() => (isHoveringInteractive ? 66 : 46), [isHoveringInteractive])
 
   return (
-    <div className="relative min-h-screen bg-bg text-text">
-      <div className="noise" />
-      <motion.div
-        className="cursor-dot"
-        style={{ x: dx, y: dy, translateX: '-50%', translateY: '-50%' }}
-      />
-      <motion.div
-        className="cursor-ring"
-        style={{
-          x: rx,
-          y: ry,
-          width: ringSize,
-          height: ringSize,
-          translateX: '-50%',
-          translateY: '-50%'
-        }}
-      />
+    <BrowserRouter>
+      <div className="relative min-h-screen bg-bg text-text">
+        <div className="noise" />
+        <motion.div
+          className="cursor-dot"
+          style={{ x: dx, y: dy, translateX: '-50%', translateY: '-50%' }}
+        />
+        <motion.div
+          className="cursor-ring"
+          style={{
+            x: rx,
+            y: ry,
+            width: ringSize,
+            height: ringSize,
+            translateX: '-50%',
+            translateY: '-50%'
+          }}
+        />
 
-      <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
 
-      <main>
-        <Hero />
-        <Stats />
-        <Features />
-        <Pricing />
-        <Testimonials />
-        <FAQ />
-        <CTA />
-      </main>
-
-      <Footer />
-    </div>
+        <MessageModal />
+      </div>
+    </BrowserRouter>
   )
 }

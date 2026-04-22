@@ -4,12 +4,21 @@ import { Plus, X } from 'lucide-react'
 
 const faqs = [
   {
-    q: 'What Is This AI Service For?',
-    a: 'Our AI‑powered tools help businesses automate workflows, make data-driven decisions, and boost productivity—perfect for any industry and business size.'
+    q: 'What Services Does Rana IT Ltd Provide?',
+    a: 'We provide professional Facebook marketing, SEO, modern web development, and graphic design to help businesses grow their online presence and sales.'
   },
-  { q: 'How Can AI Benefit My Business?', a: 'Automate repetitive tasks, reduce costs, improve customer experiences, and unlock new insights with predictive analytics.' },
-  { q: 'Can Your AI Integrate With Our Existing Systems?', a: 'Yes. devzo connects to popular CRMs, data warehouses, productivity suites, and custom APIs with strong governance controls.' },
-  { q: 'How Long Does AI Implementation Take?', a: 'Most teams go live in days. More complex integrations can take 2–6 weeks depending on data readiness and approvals.' }
+  { 
+    q: 'How Can Digital Marketing Benefit My Business?', 
+    a: 'Digital marketing allows you to target the right audience with precision, significantly increasing brand awareness, generating high-quality leads, and boosting your ROI.' 
+  },
+  { 
+    q: 'Do You Offer Custom Marketing Strategies?', 
+    a: 'Yes, every business is unique. We prepare advanced business strategy plans tailored specifically to your industry, goals, and target audience.' 
+  },
+  { 
+    q: 'How Soon Can We Expect Results?', 
+    a: 'While it depends on the specific service, our Facebook ad campaigns and optimized marketing funnels often start showing noticeable traction and leads within the first few weeks.' 
+  }
 ]
 
 export default function FAQ() {
@@ -23,8 +32,8 @@ export default function FAQ() {
 
       <div className="mx-auto max-w-6xl px-5 py-24 relative">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight">Frequently Asked Question</h2>
-          <p className="mt-5 text-white/65 max-w-xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+          <p className="mt-5 text-white/65 max-w-xl mx-auto">Find answers to the most common questions about our agency.</p>
         </div>
 
         <div className="mt-12 space-y-4">
@@ -71,17 +80,17 @@ export default function FAQ() {
         </div>
 
         <div className="mt-16 text-center">
-          <h3 className="text-2xl sm:text-4xl font-semibold tracking-tight">Still have questions?</h3>
-          <p className="mt-2 text-white/60">Don’t hesitate to contact us</p>
-          <motion.a
-            href="#contact"
+          <h3 className="text-2xl sm:text-4xl font-semibold tracking-tight">Ready to get started?</h3>
+          <p className="mt-2 text-white/60">We are here to help your business grow</p>
+          <motion.button
+            onClick={() => document.dispatchEvent(new CustomEvent('open-message-modal'))}
             data-interactive="true"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="mt-6 inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-medium border border-white/10 bg-gradient-to-r from-accent to-accent2 shadow-glow"
           >
-            Contact Us
-          </motion.a>
+            Give Offer
+          </motion.button>
         </div>
       </div>
     </section>
