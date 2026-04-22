@@ -16,6 +16,11 @@ const clients = [
   { name: 'Partner 10', logo: '/Screenshot 2026-04-22 173726.png' },
   { name: 'Partner 11', logo: '/Screenshot 2026-04-22 173831.png' },
   { name: 'Partner 12', logo: '/Screenshot 2026-04-22 173911.png' },
+  { name: 'Partner 13', logo: '/Screenshot 2026-04-22 183937.png' },
+  { name: 'Partner 14', logo: '/Screenshot 2026-04-22 183955.png' },
+  { name: 'Partner 15', logo: '/Screenshot 2026-04-22 184011.png' },
+  { name: 'Partner 16', logo: '/Screenshot 2026-04-22 184032.png' },
+  { name: 'Partner 17', logo: '/544991702_122255303264221159_8618328637782892967_n.jpg' },
 ]
 
 const VISIBLE_DEFAULT = 12
