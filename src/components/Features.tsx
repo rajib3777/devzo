@@ -202,17 +202,19 @@ export default function Services() {
 
           {/* ── Center hub ── */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="w-56 h-56 rounded-full bg-gradient-to-br from-accent to-accent2 p-[3px] shadow-glow"
-            >
-              <div className="w-full h-full rounded-full bg-bg flex flex-col items-center justify-center text-center px-4">
-                <span className="text-2xl font-black text-accent uppercase tracking-[0.2em] leading-tight">Rana IT</span>
-                <div className="h-px w-12 bg-white/20 my-2" />
-                <span className="text-base font-bold text-white/80 uppercase tracking-widest">360° Services</span>
+            <div className="w-56 h-56 rounded-full bg-gradient-to-br from-yellow-400 via-accent to-accent2 p-[4px] shadow-[0_0_50px_rgba(255,208,0,0.3)]">
+              <div className="w-full h-full rounded-full bg-bg/90 backdrop-blur-sm flex flex-col items-center justify-center text-center px-4 border border-white/5">
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  className="flex flex-col items-center"
+                >
+                  <span className="text-5xl font-black bg-gradient-to-br from-yellow-300 via-yellow-500 to-orange-500 bg-clip-text text-transparent tracking-tighter leading-none mb-1">360°</span>
+                  <span className="text-xl font-black text-white uppercase tracking-[0.15em] leading-none drop-shadow-lg">Services</span>
+                  <div className="mt-4 h-1.5 w-16 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 shadow-[0_0_15px_rgba(255,208,0,0.5)]" />
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* ── Orbit items ── */}
